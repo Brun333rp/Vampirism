@@ -48,7 +48,14 @@ public interface IReputationManager {
     public void addReputation(int reputation);
 
     enum Reputation {
-        HATED(-2000,"hated", TextFormatting.DARK_RED), HOSTILE(-1500, "hostile", TextFormatting.RED), UNFRIENDLY(-1000, "unfriendly", TextFormatting.GOLD), NEUTRAL(-500, "neutral", TextFormatting.YELLOW), FRIENDLY(500, "friendly", TextFormatting.GREEN), HONORED(1500, "honored", TextFormatting.DARK_GREEN), REVERED(2500, "revered", TextFormatting.LIGHT_PURPLE), EXALTED(3500, "exalted", TextFormatting.AQUA);
+        HATED(-2000,"hated", TextFormatting.DARK_RED),
+        HOSTILE(-1500, "hostile", TextFormatting.RED),
+        UNFRIENDLY(-1000, "unfriendly", TextFormatting.GOLD),
+        NEUTRAL(-500, "neutral", TextFormatting.YELLOW),
+        FRIENDLY(500, "friendly", TextFormatting.GREEN),
+        HONORED(1500, "honored", TextFormatting.DARK_GREEN),
+        REVERED(2500, "revered", TextFormatting.LIGHT_PURPLE),
+        EXALTED(3500, "exalted", TextFormatting.AQUA);
 
         private int reputationReq;
         private String name;

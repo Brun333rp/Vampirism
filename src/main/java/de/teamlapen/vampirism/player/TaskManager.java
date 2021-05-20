@@ -86,6 +86,7 @@ public class TaskManager implements ITaskManager {
         }
         this.removeRequirements(ins);
         this.applyRewards(ins);
+        this.factionPlayer.getReputationManager().addReputation(20);
     }
 
     @Override

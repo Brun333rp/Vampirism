@@ -7,6 +7,7 @@ import de.teamlapen.vampirism.advancements.VampireActionTrigger;
 import de.teamlapen.vampirism.api.EnumStrength;
 import de.teamlapen.vampirism.api.VReference;
 import de.teamlapen.vampirism.api.VampirismAPI;
+import de.teamlapen.vampirism.api.difficulty.IAdjustableLevel;
 import de.teamlapen.vampirism.api.entity.IBiteableEntity;
 import de.teamlapen.vampirism.api.entity.IExtendedCreatureVampirism;
 import de.teamlapen.vampirism.api.entity.factions.IFaction;
@@ -21,6 +22,7 @@ import de.teamlapen.vampirism.core.*;
 import de.teamlapen.vampirism.entity.DamageHandler;
 import de.teamlapen.vampirism.entity.ExtendedCreature;
 import de.teamlapen.vampirism.entity.factions.FactionPlayerHandler;
+import de.teamlapen.vampirism.entity.vampire.VampireBaronEntity;
 import de.teamlapen.vampirism.fluids.BloodHelper;
 import de.teamlapen.vampirism.mixin.ArmorItemAccessor;
 import de.teamlapen.vampirism.network.InputEventPacket;
@@ -1307,6 +1309,26 @@ public class VampirePlayer extends VampirismPlayer<IVampirePlayer> implements IV
             }
             this.getActionHandler().extendActionTimer(VampireActions.vampire_rage,bonus);
         }
+
+        int reputationModification = 0;
+        IFaction<?> faction = VampirismAPI.factionRegistry().getFaction(victim);
+        if (faction != null) {
+            if (faction != this.getFaction()) {
+                reputationModification += 2;
+            } else {
+                if (victim instanceof IAdjustableLevel) {
+                    float a = (float)((IAdjustableLevel) victim).getLevel() /((IAdjustableLevel) victim).getMaxLevel();
+                    if (a >= (float) this.getLevel()/this.getMaxLevel()) {
+                        reputationModification += 3;
+                    }
+                }
+                if (victim instanceof VampireBaronEntity) {
+                    reputationModification += 3;
+                }
+                reputationModification -=2;
+            }
+        }
+        this.getReputationManager().addReputation(reputationModification);
     }
 
 

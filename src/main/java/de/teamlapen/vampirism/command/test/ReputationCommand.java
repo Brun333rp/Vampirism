@@ -8,12 +8,16 @@ import de.teamlapen.vampirism.entity.factions.FactionPlayerHandler;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.server.command.EnumArgument;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class ReputationCommand extends BasicCommand {
 
     public static ArgumentBuilder<CommandSource, ?> register() {
         return Commands.literal("reputation")
+                .then(Commands.literal("amount")
+                        .executes(context -> printReputation(context.getSource(), context.getSource().asPlayer())))
                 .requires(context -> context.hasPermissionLevel(PERMISSION_LEVEL_CHEAT))
                 .then(Commands.literal("level")
                         .then(Commands.argument("level", EnumArgument.enumArgument(IReputationManager.Reputation.class))
@@ -41,5 +45,12 @@ public class ReputationCommand extends BasicCommand {
         FactionPlayerHandler.getOpt(asPlayer).map(FactionPlayerHandler::getCurrentFactionPlayer).flatMap(p -> p).ifPresent(fp ->fp.getReputationManager().addReputation(level));
         return 0;
     }
+
+    private static int printReputation(CommandSource source, ServerPlayerEntity asPlayer) {
+        Pair<Integer, IReputationManager.Reputation> pair = FactionPlayerHandler.getOpt(asPlayer).map(FactionPlayerHandler::getCurrentFactionPlayer).flatMap(p -> p).map(fp -> Pair.of(fp.getReputationManager().getReputation(), fp.getReputationManager().getReputationLevel())).orElse(Pair.of(0, IReputationManager.Reputation.NEUTRAL));
+        source.sendFeedback(new TranslationTextComponent("command.vampirism.test.reputation",pair.getValue().getComponent(), pair.getKey()), false);
+        return 0;
+    }
+
 
 }

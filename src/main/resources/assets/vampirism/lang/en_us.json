@@ -816,6 +816,7 @@
   "command.vampirism.base.config.bloodvalues.blacklist.no_type": "Please select a blacklist type",
   "command.vampirism.base.config.sun_damage.no_type": "Please select a sun damage type",
   "command.vampirism.base.config.sun_damage.blacklist.no_type": "Please select a blacklist type",
+  "command.vampirism.test.reputation": "Your reputation is %s (%d)",
   "__comment": "commands_old",
   "command.vampirism.base.vampire_biome.parse_dist": "Failed to parse max distance. Using %s.",
   "__comment": "entities",

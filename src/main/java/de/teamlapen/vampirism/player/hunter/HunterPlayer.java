@@ -23,6 +23,7 @@ import de.teamlapen.vampirism.util.ScoreboardUtil;
 import de.teamlapen.vampirism.util.SharedMonsterAttributes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -144,6 +145,23 @@ public class HunterPlayer extends VampirismPlayer<IHunterPlayer> implements IHun
             return VampirismAPI.factionRegistry().getPredicate(getFaction(), ignoreDisguise);
         }
     }
+
+    @Override
+    public void onEntityKilled(LivingEntity victim, DamageSource src) {
+        IFaction<?> faction = VampirismAPI.factionRegistry().getFaction(victim);
+        if (faction != null) {
+            if (faction != this.getFaction()) {
+                this.getReputationManager().addReputation(2);
+            } else {
+                this.getReputationManager().addReputation(-10);
+            }
+        } else {
+            if (victim instanceof VillagerEntity) {
+                this.getReputationManager().addReputation(-10);
+            }
+        }
+    }
+
 
     @Nonnull
     @Override
