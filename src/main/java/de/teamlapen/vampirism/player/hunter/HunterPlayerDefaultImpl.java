@@ -1,6 +1,7 @@
 package de.teamlapen.vampirism.player.hunter;
 
 import de.teamlapen.vampirism.api.entity.factions.IFaction;
+import de.teamlapen.vampirism.api.entity.player.IReputationManager;
 import de.teamlapen.vampirism.api.entity.player.actions.IActionHandler;
 import de.teamlapen.vampirism.api.entity.player.hunter.IHunterPlayer;
 import de.teamlapen.vampirism.api.entity.player.skills.ISkillHandler;
@@ -98,6 +99,12 @@ class HunterPlayerDefaultImpl implements IHunterPlayer {
     @Nonnull
     @Override
     public ITaskManager getTaskManager() {
+        return null;
+    }
+
+    @Nonnull
+    @Override
+    public IReputationManager getReputationManager() {
         return null;
     }
 }

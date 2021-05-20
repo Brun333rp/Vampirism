@@ -26,6 +26,7 @@ public abstract class VampirismPlayer<T extends IFactionPlayer<?>> implements IF
      */
     private final TaskManager taskManager;
     protected final PlayerEntity player;
+    private final ReputationManager reputationManager;
 
     public VampirismPlayer(PlayerEntity player) {
         this.player = player;
@@ -34,6 +35,7 @@ public abstract class VampirismPlayer<T extends IFactionPlayer<?>> implements IF
         }else {
             this.taskManager = null;
         }
+        this.reputationManager = new ReputationManager(this);
     }
 
 
@@ -49,6 +51,11 @@ public abstract class VampirismPlayer<T extends IFactionPlayer<?>> implements IF
     @Override
     public TaskManager getTaskManager() {
         return taskManager;
+    }
+
+    @Nonnull
+    public ReputationManager getReputationManager() {
+        return this.reputationManager;
     }
 
     /**
@@ -86,6 +93,9 @@ public abstract class VampirismPlayer<T extends IFactionPlayer<?>> implements IF
     public void onUpdate() {
         if(!isRemote()) {
             this.taskManager.tick();
+        }
+        if(this.reputationManager.tick()&& !isRemote()) {
+            this.sync(this.reputationManager.writeNBT(new CompoundNBT()), false);
         }
     }
 
@@ -134,6 +144,7 @@ public abstract class VampirismPlayer<T extends IFactionPlayer<?>> implements IF
      * @param nbt
      */
     protected void loadUpdate(CompoundNBT nbt) {
+        this.reputationManager.readNBT(nbt);
     }
 
 
@@ -153,6 +164,7 @@ public abstract class VampirismPlayer<T extends IFactionPlayer<?>> implements IF
      * @param nbt
      */
     protected void writeFullUpdate(CompoundNBT nbt) {
+        this.reputationManager.writeNBT(nbt);
     }
 
     private void copyFrom(PlayerEntity old) {
@@ -165,6 +177,7 @@ public abstract class VampirismPlayer<T extends IFactionPlayer<?>> implements IF
         } else {
             LOGGER.debug("The player is loaded on the client side and therefore taskmaster related data is missing");
         }
+        this.reputationManager.readNBT(nbt);
     }
 
     public void saveData(CompoundNBT nbt) {
@@ -173,5 +186,6 @@ public abstract class VampirismPlayer<T extends IFactionPlayer<?>> implements IF
         } else {
             LOGGER.debug("The player is saved on the client side and therefore taskmaster related data is missing");
         }
+        this.reputationManager.writeNBT(nbt);
     }
 }

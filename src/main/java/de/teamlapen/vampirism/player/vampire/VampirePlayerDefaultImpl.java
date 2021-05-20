@@ -2,6 +2,7 @@ package de.teamlapen.vampirism.player.vampire;
 
 import de.teamlapen.vampirism.api.EnumStrength;
 import de.teamlapen.vampirism.api.entity.factions.IFaction;
+import de.teamlapen.vampirism.api.entity.player.IReputationManager;
 import de.teamlapen.vampirism.api.entity.player.actions.IActionHandler;
 import de.teamlapen.vampirism.api.entity.player.skills.ISkillHandler;
 import de.teamlapen.vampirism.api.entity.player.task.ITaskManager;
@@ -115,6 +116,12 @@ class VampirePlayerDefaultImpl implements IVampirePlayer {
     @Nonnull
     @Override
     public ITaskManager getTaskManager() {
+        return null;
+    }
+
+    @Nonnull
+    @Override
+    public IReputationManager getReputationManager() {
         return null;
     }
 

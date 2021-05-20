@@ -46,6 +46,11 @@ public interface IFactionPlayer<T extends IFactionPlayer<?>> extends IFactionEnt
     @Nonnull
     ITaskManager getTaskManager();
 
+    @Nonnull
+    default IReputationManager getReputationManager() { //TODO 1.17 remove default implementation
+        return IReputationManager.DUMMY;
+    }
+
     /**
      * @return the faction this faction player belongs to
      */

@@ -130,6 +130,10 @@ public class VampirismScreen extends ContainerScreen<VampirismContainer> impleme
             this.font.func_243246_a(matrixStack, text, this.guiLeft + 152 - (width/2), this.guiTop + 52, 0);
         }
 
+        ITextComponent reputation = this.factionPlayer.getReputationManager().getReputationLevel().getComponent();
+        int width = this.font.getStringPropertyWidth(reputation);
+        this.font.func_243246_a(matrixStack, reputation, this.guiLeft + 32 -  (width/2), this.guiTop + 66,-1);
+
         this.oldMouseX = mouseX;
         this.oldMouseY = mouseY;
         this.list.renderToolTip(matrixStack, mouseX, mouseY);

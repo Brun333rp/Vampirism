@@ -1074,5 +1074,15 @@
   "refinement_set.vampirism.sun_screen": "Sun Protection",
   "refinement_set.vampirism.sun_screen_debuffed": "Sun Protection",
   "refinement_set.vampirism.sun_screen_buffed": "Sun Protection",
-  "refinement_set.vampirism.vampire_sword": "Swords"
+  "refinement_set.vampirism.vampire_sword": "Swords",
+  "__comment": "reputation",
+  "reputation.vampirism.hated": "Hated",
+  "reputation.vampirism.hostile": "Hostile",
+  "reputation.vampirism.unfriendly": "Unfriendly",
+  "reputation.vampirism.neutral": "Neutral",
+  "reputation.vampirism.friendly": "Friendly",
+  "reputation.vampirism.honored": "Honored",
+  "reputation.vampirism.revered": "Revered",
+  "reputation.vampirism.exalted": "Exalted"
+
 }
