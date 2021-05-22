@@ -141,6 +141,17 @@ public class VampirismScreen extends ContainerScreen<VampirismContainer> impleme
         this.renderHoveredRefinementTooltip(matrixStack, mouseX, mouseY);
     }
 
+    @Override
+    protected void renderHoveredTooltip(MatrixStack matrixStack, int x, int y) {
+        super.renderHoveredTooltip(matrixStack, x, y);
+        ITextComponent reputation = this.factionPlayer.getReputationManager().getReputationLevel().getComponent();
+        int width = this.font.getStringPropertyWidth(reputation);
+        int textStart = this.guiLeft + 32 -(width/2);
+        if (x > textStart && x < textStart +  width && y > this.guiTop + 52 && y < this.guiTop + 66+9) {
+            this.renderTooltip(matrixStack,new TranslationTextComponent("text.vampirism.reputation",reputation),x,y);
+        }
+    }
+
     protected void renderHoveredRefinementTooltip(MatrixStack matrixStack, int mouseX, int mouseY) {
         if (this.hoveredSlot != null) {
             int index = this.hoveredSlot.slotNumber;

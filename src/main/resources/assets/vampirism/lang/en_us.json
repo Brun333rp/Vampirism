@@ -214,6 +214,7 @@
   "text.vampirism.task.require_parent": "Complete parent (%s)",
   "text.vampirism.task.prerequisites": "Prerequisites",
   "text.vampirism.task.prerequisites.none": "None",
+  "text.vampirism.reputation": "Current Reputation %s",
   "itemGroup.vampirism": "Vampirism",
   "death.attack.sun": "%1$s did not like the sun",
   "death.attack.garlic": "%1$s was poisoned by garlic",
